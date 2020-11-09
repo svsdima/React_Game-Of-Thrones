@@ -1,6 +1,11 @@
-.list-group-item {
-    background-color: #fff;
-}
-.item-list .list-group-item {
-    cursor: pointer;
+.item-list {
+    .list-group-item {
+        background-color: #fff;
+    }
+    .item-list .list-group-item {
+        cursor: pointer;
+    }
+    h4 {
+        text-align: center;
+    }
 }

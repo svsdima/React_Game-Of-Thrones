@@ -1,10 +1,6 @@
-.list-group-item {
-    display: flex;
-    justify-content: space-between;
-}
 .char-details {
-    display: flex;
-    justify-content: space-between;
+    // display: flex;
+    // justify-content: space-between;
     background-color: #fff;
     padding: 25px 25px 15px 25px;
   
@@ -12,14 +8,24 @@
       margin-bottom: 20px;
       text-align: center;
     }
-}
-  
-.select-error {
-    color: #fff;
-    text-align: center;
-    font-size: 26px;
+
+    
+    .select-error {
+        color: #fff;
+        text-align: center;
+        font-size: 26px;
+    }
+    
+    .list-group {
+        display: flex;
+        justify-self: space-between;
+        
+    
+    }
+    .list-group-item {
+        display: flex;
+        justify-content: space-between;
+    }
+
 }
 
-.term {
-
-}

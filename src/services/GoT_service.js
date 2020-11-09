@@ -1,6 +1,6 @@
 /* Работаем с API of Ice and Fire https://anapioficeandfire.com */
 /* База данных на основе Игры Престолов */
-class GotService {
+export default class GotService {
 
     constructor() {
         /* Нижнее подчёркивание - знак для других разработчиков, что здесь статичные данные и  ничего менять нельзя вообще */
@@ -15,26 +15,68 @@ class GotService {
         }
 
         return await res.json();
-    };
-
-    /* Получаем список персонажей (1 страница - 10 персонажей, pageSize устанавливает кол-во персонажей на странице ) */
-    getAllCharacters() {
-        return this.getResource('/characters?page=5&pageSize=10');
     }
-    /* Получаем персонажа по id */
-    getCharacter(id) {
-        return this.getResource(`/characters/${id}`);
+    
+    async getAllBooks() {
+        const allBook = await this.getResource(`/books/`);
+        return allBook.map(this._transformBook);
+    }
+    
+    async getBook(id) {
+        const book = await this.getResource(`/books/${id}/`);
+        return this._transformBook(book);
+    }
+    
+    async getAllCharacters() {
+        const res = await this.getResource(`/characters?page=5&pageSize=10`);
+        return res.map(this._transformCharacter);
+    }
+    
+    async getCharacter (id) {
+        const character = await this.getResource(`/characters/${id}`);
+        return this._transformCharacter(character);
+    }
+    
+    async getAllHouses() {
+        const allHouse = await this.getResource(`/houses/`);
+        return allHouse.map(this._transformHouse)
+    }
+    
+    async getHouse(id) {
+        const house = await this.getResource(`/houses/${id}/`);
+        return this._transformHouse(house);
+    }
+
+    /* Трансформация Персонажей */
+    _transformCharacter(char) {
+        return {
+            name: char.name,
+            gender: char.gender,
+            born: char.born,
+            died: char.died,
+            culture: char.culture
+        }
+    }
+
+    /* Трансформация Домов */
+    _transformHouse(house) {
+        return {
+            name: house.name,
+            region: house.region,
+            words: house.words,
+            titles: house.titles,
+            overlord: house.overlord,
+            ancestralWeapons: house.ancestralWeapons
+        }
+    }
+
+    /* Трансформация Книг */
+    _transformBook(book) {
+        return {
+            name: book.name,
+            numberOfPages: book.numberOfPages,
+            publisher: book.publisher,
+            released: book.released
+        }
     }
 }
-
-const got = new GotService();
-
-got.getAllCharacters()
-    /* В res получаю массив с данными, дальше в консоль вывожу имя каждого элемента, который буду перебирать в forEach */
-    .then(res => {
-        res.forEach(item => console.log(item.name));
-
-    });
-
-got.getCharacter(130)
-    .then(res => console.log(res));
