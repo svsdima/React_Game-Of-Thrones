@@ -69,12 +69,14 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 
-### База данных Игра Престолов
-Подключил сетку reactstrap. [https://reactstrap.github.io/components/layout/]
-В index.html включить BootstrapCDN [https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css], иначе сетка не работает.
+## База данных Игра Престолов
+
+### Подключил сетку reactstrap. 
+[Сетка React](https://reactstrap.github.io/components/layout/)
+В index.html включить [BootstrapCDN](https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css), иначе сетка не работает.
 В js файле, где используется сетка import {Col, Row, Container} from 'reactstrap';
 
-Разбил приложения на компоненты:
+### Разбил приложения на компоненты:
 - /app сборка приложения
 - /charDetails 
 - /header шапка страницы
