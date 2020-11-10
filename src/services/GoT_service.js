@@ -7,7 +7,7 @@ export default class GotService {
         this._apiBase = 'https://www.anapioficeandfire.com/api';
     }
 
-    async getResource(url) {
+    getResource = async (url) => {
         const res = await fetch(`${this._apiBase}${url}`);
 
         if (!res.ok) {
@@ -17,68 +17,57 @@ export default class GotService {
         return await res.json();
     }
     
-    async getAllBooks() {
+    getAllBooks = async () => {
         const allBook = await this.getResource(`/books/`);
         return allBook.map(this._transformBook);
     }
     
-    async getBook(id) {
+    getBook = async (id) => {
         const book = await this.getResource(`/books/${id}/`);
         return this._transformBook(book);
     }
     
-    async getAllCharacters() {
+    getAllCharacters = async () => {
         const res = await this.getResource(`/characters?page=5&pageSize=10`);
         return res.map(this._transformCharacter);
     }
     
-    async getCharacter (id) {
+    getCharacter = async (id) => {
         const character = await this.getResource(`/characters/${id}`);
         return this._transformCharacter(character);
     }
     
-    async getAllHouses() {
+    getAllHouses = async () => {
         const allHouse = await this.getResource(`/houses/`);
         return allHouse.map(this._transformHouse)
     }
     
-    async getHouse(id) {
+    getHouse = async (id) => {
         const house = await this.getResource(`/houses/${id}/`);
         return this._transformHouse(house);
     }
 
-    isSet(data) {
+    isSet (data){
         if (data) {
-            return data
+            return  data
         } else {
             return 'Нет данных'
         }
     }
 
-    // /* Трансформация Персонажей */
-    // _transformCharacter(char) {
-    //     return {
-    //         name: this.isSet(char.name),
-    //         gender: this.isSet(char.gender),
-    //         born: this.isSet(char.born),
-    //         died: this.isSet(char.died), 
-    //         culture: this.isSet(char.culture)
-    //     };
-    // }
-
     /* Трансформация Персонажей */
-    _transformCharacter(char) {
+    _transformCharacter = (char) => {
         return {
-            name: char.name,
-            gender: char.gender,
-            born: char.born,
-            died: char.died, 
-            culture: char.culture
+            name: this.isSet(char.name),
+            gender: this.isSet(char.gender),
+            born: this.isSet(char.born),
+            died: this.isSet(char.died), 
+            culture: this.isSet(char.culture)
         };
     }
 
     /* Трансформация Домов */
-    _transformHouse(house) {
+    _transformHouse = (house) => {
         return {
             name: house.name,
             region: house.region,
@@ -90,7 +79,7 @@ export default class GotService {
     }
 
     /* Трансформация Книг */
-    _transformBook(book) {
+    _transformBook = (book) => {
         return {
             name: book.name,
             numberOfPages: book.numberOfPages,

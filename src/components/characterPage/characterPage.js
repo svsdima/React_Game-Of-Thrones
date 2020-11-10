@@ -3,9 +3,14 @@ import {Col, Row, Container} from 'reactstrap';
 import ItemList from '../itemList';
 import CharDetail from '../charDetails';
 import ErrorMessage from '../errorMessage';
+import GotService from '../../services/GoT_service';
+import RowBlock from '../rowBlock';
 import './characterPage.scss';
 
 export default class CharacterPage extends Component {
+
+    /* Новая база данных */
+    gotService = new GotService();
 
     state = {
         selectedChar: 130,
@@ -33,16 +38,21 @@ export default class CharacterPage extends Component {
             return <ErrorMessage/>
         }
 
+        /* Список */
+        const itemList = (
+            <ItemList
+                onCharSelected={this.onCharSelected}
+                getData={this.gotService.getAllCharacters}
+                renderItem={({name, gender}) => `${name} (${gender})`} />
+        )
+        
+        /* Подробное описание */
+        const charDetail = (
+            <CharDetail charId={this.state.selectedChar} />
+        )
+
         return (
-            <Row>
-            <Col md='5'>
-                <ItemList
-                onCharSelected={this.onCharSelected} />
-            </Col>
-            <Col md='7'>
-                <CharDetail charId={this.state.selectedChar} />
-            </Col>
-        </Row>
+            <RowBlock left={itemList} right={charDetail}/>
         )
     }
 }

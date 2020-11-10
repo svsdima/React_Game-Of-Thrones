@@ -4,10 +4,17 @@ import Header from '../header';
 import RandomChar from '../randomChar';
 import ErrorMessage from '../errorMessage';
 import CharacterPage from '../characterPage';
+import ItemList from '../itemList';
+import CharDetail from '../charDetails';
+import GotService from '../../services/GoT_service';
 
 import './app.scss';
 
 export default class App extends Component {
+
+    /* Новая база данных */
+    gotService = new GotService();
+
     state = {
         showRandomChar: true,
         error: false
@@ -56,6 +63,28 @@ export default class App extends Component {
                         </Col>
                     </Row>
                     <CharacterPage/>
+                    <Row>
+                        <Col md='5'>
+                            <ItemList
+                            onCharSelected={this.onCharSelected}
+                            getData={this.gotService.getAllBooks}
+                            renderItem={(item) => `${item.name}`} />
+                        </Col>
+                        <Col md='7'>
+                            <CharDetail charId={this.state.selectedChar} />
+                        </Col>
+                    </Row>
+                    <Row>
+                        <Col md='5'>
+                            <ItemList
+                            onCharSelected={this.onCharSelected}
+                            getData={this.gotService.getAllHouses}
+                            renderItem={(item) => `${item.name}`} />
+                        </Col>
+                        <Col md='7'>
+                            <CharDetail charId={this.state.selectedChar} />
+                        </Col>
+                    </Row>
                 </Container>
             </Container>
         );

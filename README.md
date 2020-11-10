@@ -78,7 +78,9 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### Разбил приложения на компоненты:
 - /app сборка приложения
-- /charDetails 
+- /characterPage страница с персонажами
+- /charDetails подробное описание выбранного персонажа
 - /header шапка страницы
-- /itemList
+- /itemList список персонажей
 - /randomChar показывает случайного персонажа каждые несколько секунд
+- /rowBlock постройка списка

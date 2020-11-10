@@ -1,36 +1,37 @@
 import React, { Component } from 'react';
 import './itemList.scss';
-import GotService from '../../services/GoT_service';
 import Spinner from '../spinner';
 export default class ItemList extends Component {
 
-    /* Новая база данных */
-    gotService = new GotService();
-
     state = {
-        charList: null
+        itemList: null
     }
 
     /* Запрос к серверу на получение персонажей */
     componentDidMount() {
-        this.gotService.getAllCharacters()
-            .then( (charList) => {
+        const {getData} = this.props;
+
+        /* Делаем независимый паттерн  */
+        getData()
+            .then( (itemList) => {
                 this.setState({
-                    charList
+                    itemList
                 });
             });
     }
 
     /* Создаём список персонажей */
     renderItems(arr) {
-        return arr.map((item, i) => {
+        return arr.map((item, id) => {
+            // const {id} = item;
+            const label = this.props.renderItem(item);
             // const {id, name} = item;
             return (
                 <li 
-                    key={i}
+                    key={id}
                     className="list-group-item"
-                    onClick={() => this.props.onCharSelected(41 + i)}>
-                    {item.name}
+                    onClick={() => this.props.onCharSelected(41 + id)}>
+                    {label}
                 </li> 
             );
         });
@@ -38,13 +39,13 @@ export default class ItemList extends Component {
 
     render() {
 
-        const {charList} = this.state;
+        const {itemList} = this.state;
 
-        if(!charList) {
+        if(!itemList) {
             return <Spinner/>
         }
 
-        const items = this.renderItems(charList);
+        const items = this.renderItems(itemList);
 
         return (
             <ul className="item-list list-group">
