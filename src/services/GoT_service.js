@@ -55,15 +55,26 @@ export default class GotService {
         }
     }
 
+    // /* Трансформация Персонажей */
+    // _transformCharacter(char) {
+    //     return {
+    //         name: this.isSet(char.name),
+    //         gender: this.isSet(char.gender),
+    //         born: this.isSet(char.born),
+    //         died: this.isSet(char.died), 
+    //         culture: this.isSet(char.culture)
+    //     };
+    // }
+
     /* Трансформация Персонажей */
     _transformCharacter(char) {
         return {
-            name: this.isSet(char.name),
-            gender: this.isSet(char.gender),
-            born: this.isSet(char.born),
-            died: this.isSet(char.died),
-            culture: this.isSet(char.culture)
-        }
+            name: char.name,
+            gender: char.gender,
+            born: char.born,
+            died: char.died, 
+            culture: char.culture
+        };
     }
 
     /* Трансформация Домов */

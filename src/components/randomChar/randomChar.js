@@ -1,15 +1,10 @@
 import React, { Component } from 'react';
 import './randomChar.scss';
 import GotService from '../../services/GoT_service';
-import Spinnner from '../spinner';
+import Spinner from '../spinner';
 import ErrorMessage from '../errorMessage';
 
 export default class RandomChar extends Component {
-
-    constructor() {
-        super();
-        this.updateChar();
-    }
 
     /* Новая база данных */
     gotService = new GotService();
@@ -18,6 +13,17 @@ export default class RandomChar extends Component {
     state = {
         char: {},
         loading: true
+    }
+
+    /* Вызывается, когда компонент успешно отрисовался и появился на странице */
+    componentDidMount() {
+        this.updateChar();
+        this.timerId = setInterval(this.updateChar, 5000);
+    }
+
+    /* Вызывается, когда компонент удалён на странице */
+    componentWillUnmount() {
+        clearInterval(this.timerId);
     }
 
     onCharLoaded = (char) => {
@@ -37,7 +43,7 @@ export default class RandomChar extends Component {
     }
 
     /* Обновляет нашего персонажа */
-    updateChar() {
+    updateChar = () => {
         const id = Math.floor(Math.random()*140 + 25); /* Рандомный персонаж начинается с 25 и заканчивается 140 */
         this.gotService.getCharacter(id)
         .then(this.onCharLoaded)
@@ -45,19 +51,20 @@ export default class RandomChar extends Component {
     }
 
     render() {
+        console.log('render');
         const {char, loading, error} = this.state;
 
         /* Если error - true, ставлю ErrorMessage, в противном случае ничего не ставлю */
         const errorMessage = error ? <ErrorMessage/> : null;
 
-        // /* Если loading - true, ставлю Spinnner, в противном случае ничего не ставлю */
-        const spinner = loading ? <Spinnner/> : null;
+        // /* Если loading - true, ставлю Spinner, в противном случае ничего не ставлю */
+        const spinner = loading ? <Spinner/> : null;
 
         // /* Если loading и error - false, ставлю View, в противном случае ничего не ставлю */
         const content = !(loading || error) ? <View char={char}/> : null;
 
-        /* Улучш. версия: Если loading - true, ставлю Spinnner, в противном случае ставлю View */
-        // const content = loading ? <Spinnner/> : <View char={char}/>;
+        /* Улучш. версия: Если loading - true, ставлю Spinner, в противном случае ставлю View */
+        // const content = loading ? <Spinner/> : <View char={char}/>;
 
         return (
             <div className="random-block rounded">
