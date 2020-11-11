@@ -20,7 +20,7 @@ export default class ItemList extends Component {
             });
     }
 
-    /* Создаём список персонажей */
+    /* Создаём список элементов */
     renderItems(arr) {
         return arr.map((item) => {
             const {id} = item;

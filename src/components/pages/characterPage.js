@@ -46,7 +46,9 @@ export default class CharacterPage extends Component {
         
         /* Подробное описание */
         const charDetail = (
-            <ItemDetail itemId={this.state.selectedChar}>
+            <ItemDetail 
+            itemId={this.state.selectedChar}
+            getData={this.gotService.getCharacter}>
                 <Field field='gender' label='Пол:' />
                 <Field field='born' label='Дата рождения:' />
                 <Field field='died' label='Дата смерти:' />

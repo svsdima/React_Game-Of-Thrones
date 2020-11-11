@@ -15,6 +15,8 @@ export default class BookItem extends Component {
             itemId={this.props.bookId}
             getData={this.gotService.getBook} >
                 <Field field='numberOfPages' label='Кол-во страниц:' />
+                <Field field='publisher' label='Издатель:'/>
+                <Field field='released' label='Год выпуска:'/>
             </ItemDetail>
         )
     }

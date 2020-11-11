@@ -49,9 +49,9 @@ export default class HousePage extends Component {
             itemId={this.state.selectedHouse}
             getData={this.gotService.getHouse} >
                 <Field field='region' label='Регион:' />
-                <Field field='words' label='Слов:' />
-                <Field field='titles' label='Заглавий'/>
-                <Field field='ancestralWeapons' label='Родовое Оружие'/>
+                <Field field='words' label='Речь:' />
+                <Field field='titles' label='Владелец:'/>
+                <Field field='ancestralWeapons' label='Родовое Оружие:'/>
             </ItemDetail>
         )
 

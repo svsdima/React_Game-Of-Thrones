@@ -17,8 +17,6 @@ export {
 }
 export default class ItemDetail extends Component {
 
-    /* Новая база данных */
-    gotService = new GotService();
 
     state = {
         item: null
@@ -38,18 +36,17 @@ export default class ItemDetail extends Component {
 
     /* Обновление персонажа */
     updateItem() {
-        const {itemId} = this.props;
+        const {itemId, getData} = this.props;
         if (!itemId) {
-            return
+            return;
         }
 
-        this.gotService.getCharacter(itemId)
+        getData(itemId)
             .then((item) => {
                 this.setState({item})
-            });
-
-        // this.foo.bar = 0;
+            })
     }
+
 
     render() {
 
