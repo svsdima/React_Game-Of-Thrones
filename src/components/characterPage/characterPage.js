@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {Col, Row, Container} from 'reactstrap';
 import ItemList from '../itemList';
-import CharDetail from '../charDetails';
+import CharDetail, {Field} from '../charDetails';
 import ErrorMessage from '../errorMessage';
 import GotService from '../../services/GoT_service';
 import RowBlock from '../rowBlock';
@@ -18,7 +18,7 @@ export default class CharacterPage extends Component {
     }
 
     /* Устанавливаем id в выбранном персонаже */
-    onCharSelected = (id) => {
+    onItemSelected = (id) => {
         this.setState({
             selectedChar: id
         })
@@ -41,14 +41,19 @@ export default class CharacterPage extends Component {
         /* Список */
         const itemList = (
             <ItemList
-                onCharSelected={this.onCharSelected}
+                onItemSelected={this.onItemSelected}
                 getData={this.gotService.getAllCharacters}
                 renderItem={({name, gender}) => `${name} (${gender})`} />
         )
         
         /* Подробное описание */
         const charDetail = (
-            <CharDetail charId={this.state.selectedChar} />
+            <CharDetail charId={this.state.selectedChar}>
+                <Field field='gender' label='Пол:' />
+                <Field field='born' label='Дата рождения:' />
+                <Field field='died' label='Дата смерти:' />
+                <Field field='culture' label='Культура:' />
+            </CharDetail>
         )
 
         return (

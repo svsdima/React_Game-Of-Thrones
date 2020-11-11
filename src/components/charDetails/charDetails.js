@@ -2,6 +2,19 @@ import React, {Component} from 'react';
 import './charDetails.scss';
 import GotService from '../../services/GoT_service';
 import Spinner from '../spinner';
+
+const Field = ({char, field, label}) => {
+    return (
+        <li className="list-group-item">
+            <span className="term">{label}</span>
+            <span>{char[field]}</span>
+        </li>
+    )
+}
+
+export {
+    Field
+}
 export default class CharDetail extends Component {
 
     /* Новая база данных */
@@ -44,28 +57,18 @@ export default class CharDetail extends Component {
             return <span className="select-error">Пожалуйста выберите персонажа</span>
         }
 
-        const {name, gender, born, died, culture} = this.state.char;
+        const {char} = this.state;
+        const {name} = char;
 
         return (
             <div className="char-details rounded">
                 <h4>{name}</h4>
                 <ul className="list-group list-group-flush">
-                    <li className="list-group-item">
-                        <span className="term">Пол: </span>
-                        <span>{gender}</span>
-                    </li>
-                    <li className="list-group-item">
-                        <span className="term">Дата рождения: </span>
-                        <span>{born}</span>
-                    </li>
-                    <li className="list-group-item">
-                        <span className="term">Дата смерти: </span>
-                        <span>{died}</span>
-                    </li>
-                    <li className="list-group-item">
-                        <span className="term">Культура: </span>
-                        <span>{culture}</span>
-                    </li>
+                    {
+                        React.Children.map(this.props.children, (child) => {
+                            return React.cloneElement(child, {char})
+                        })
+                    }
                 </ul>
             </div>
         );
