@@ -28,7 +28,7 @@ export default class GotService {
     }
     
     getAllCharacters = async () => {
-        const res = await this.getResource(`/characters?page=6&pageSize=50`);
+        const res = await this.getResource(`/characters?page=4&pageSize=50`);
         return res.map(this._transformCharacter);
     }
     
@@ -75,22 +75,24 @@ export default class GotService {
     /* Трансформация Домов */
     _transformHouse = (house) => {
         return {
-            name: house.name,
-            region: house.region,
-            words: house.words,
-            titles: house.titles,
-            overlord: house.overlord,
-            ancestralWeapons: house.ancestralWeapons
+            id: this._extractId(house),
+            name: this.isSet(house.name),
+            region: this.isSet(house.region),
+            words: this.isSet(house.words),
+            titles: this.isSet(house.titles),
+            overlord: this.isSet(house.overlord),
+            ancestralWeapons: this.isSet(house.ancestralWeapons)
         }
     }
 
     /* Трансформация Книг */
     _transformBook = (book) => {
         return {
-            name: book.name,
-            numberOfPages: book.numberOfPages,
-            publisher: book.publisher,
-            released: book.released
+            id: this._extractId(book),
+            name: this.isSet(book.name),
+            numberOfPages: this.isSet(book.numberOfPages),
+            publisher: this.isSet(book.publisher),
+            released: this.isSet(book.released)
         }
     }
 }

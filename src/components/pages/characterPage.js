@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
-import {Col, Row, Container} from 'reactstrap';
 import ItemList from '../itemList';
-import CharDetail, {Field} from '../charDetails';
+import ItemDetail, {Field} from '../itemDetails';
 import ErrorMessage from '../errorMessage';
 import GotService from '../../services/GoT_service';
 import RowBlock from '../rowBlock';
-import './characterPage.scss';
 
 export default class CharacterPage extends Component {
 
@@ -48,12 +46,12 @@ export default class CharacterPage extends Component {
         
         /* Подробное описание */
         const charDetail = (
-            <CharDetail charId={this.state.selectedChar}>
+            <ItemDetail itemId={this.state.selectedChar}>
                 <Field field='gender' label='Пол:' />
                 <Field field='born' label='Дата рождения:' />
                 <Field field='died' label='Дата смерти:' />
                 <Field field='culture' label='Культура:' />
-            </CharDetail>
+            </ItemDetail>
         )
 
         return (

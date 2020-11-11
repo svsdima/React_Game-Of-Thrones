@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import './charDetails.scss';
+import './itemDetails.scss';
 import GotService from '../../services/GoT_service';
 import Spinner from '../spinner';
 
-const Field = ({char, field, label}) => {
+const Field = ({item, field, label}) => {
     return (
         <li className="list-group-item">
             <span className="term">{label}</span>
-            <span>{char[field]}</span>
+            <span>{item[field]}</span>
         </li>
     )
 }
@@ -15,13 +15,13 @@ const Field = ({char, field, label}) => {
 export {
     Field
 }
-export default class CharDetail extends Component {
+export default class ItemDetail extends Component {
 
     /* Новая база данных */
     gotService = new GotService();
 
     state = {
-        char: null
+        item: null
     }
 
     /* При обновлении компонента вызываем обновление персонажа */
@@ -31,21 +31,21 @@ export default class CharDetail extends Component {
 
     /* Проверка на совпадение с предыдущим пропсом */
     componentDidUpdate(prevProps) {
-        if (this.props.charId !== prevProps.charId) {
+        if (this.props.itemId !== prevProps.itemId) {
             this.updateChar();
         }
     }
 
     /* Обновление персонажа */
     updateChar() {
-        const {charId} = this.props;
-        if (!charId) {
+        const {itemId} = this.props;
+        if (!itemId) {
             return
         }
 
-        this.gotService.getCharacter(charId)
-            .then((char) => {
-                this.setState({char})
+        this.gotService.getCharacter(itemId)
+            .then((item) => {
+                this.setState({item})
             });
 
         // this.foo.bar = 0;
@@ -53,20 +53,20 @@ export default class CharDetail extends Component {
 
     render() {
 
-        if (!this.state.char) {
+        if (!this.state.item) {
             return <span className="select-error">Пожалуйста выберите персонажа</span>
         }
 
-        const {char} = this.state;
-        const {name} = char;
+        const {item} = this.state;
+        const {name} = item;
 
         return (
-            <div className="char-details rounded">
+            <div className="item-details rounded">
                 <h4>{name}</h4>
                 <ul className="list-group list-group-flush">
                     {
                         React.Children.map(this.props.children, (child) => {
-                            return React.cloneElement(child, {char})
+                            return React.cloneElement(child, {item})
                         })
                     }
                 </ul>

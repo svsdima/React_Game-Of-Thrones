@@ -3,9 +3,7 @@ import {Col, Row, Container} from 'reactstrap';
 import Header from '../header';
 import RandomChar from '../randomChar';
 import ErrorMessage from '../errorMessage';
-import CharacterPage from '../characterPage';
-import ItemList from '../itemList';
-import CharDetail from '../charDetails';
+import {CharacterPage, HousePage, BookPage} from '../pages';
 import GotService from '../../services/GoT_service';
 
 import './app.scss';
@@ -63,7 +61,9 @@ export default class App extends Component {
                         </Col>
                     </Row>
                     <CharacterPage/>
-                    <Row>
+                    <HousePage/>
+                    <BookPage/>
+                    {/* <Row>
                         <Col md='5'>
                             <ItemList
                             onItemSelected={this.onItemSelected}
@@ -71,7 +71,7 @@ export default class App extends Component {
                             renderItem={(item) => `${item.name}`} />
                         </Col>
                         <Col md='7'>
-                            <CharDetail charId={this.state.selectedChar} />
+                            <ItemDetail charId={this.state.selectedChar} />
                         </Col>
                     </Row>
                     <Row>
@@ -82,9 +82,9 @@ export default class App extends Component {
                             renderItem={(item) => `${item.name}`} />
                         </Col>
                         <Col md='7'>
-                            <CharDetail charId={this.state.selectedChar} />
+                            <ItemDetail charId={this.state.selectedChar} />
                         </Col>
-                    </Row>
+                    </Row> */}
                 </Container>
             </Container>
         );
