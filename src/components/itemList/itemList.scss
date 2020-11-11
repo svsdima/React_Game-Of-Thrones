@@ -1,4 +1,7 @@
 .item-list {
+    height: 500px;
+    overflow-y: scroll;
+
     .list-group-item {
         background-color: #fff;
         // margin-top: 10px;

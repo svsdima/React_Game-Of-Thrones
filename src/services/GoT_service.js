@@ -28,7 +28,7 @@ export default class GotService {
     }
     
     getAllCharacters = async () => {
-        const res = await this.getResource(`/characters?page=5&pageSize=10`);
+        const res = await this.getResource(`/characters?page=6&pageSize=50`);
         return res.map(this._transformCharacter);
     }
     
@@ -55,9 +55,15 @@ export default class GotService {
         }
     }
 
+    _extractId = (item) => {
+        const idRegExp = /\/([0-9]*)$/;
+        return item.url.match(idRegExp)[1];
+    }
+
     /* Трансформация Персонажей */
     _transformCharacter = (char) => {
         return {
+            id: this._extractId(char),
             name: this.isSet(char.name),
             gender: this.isSet(char.gender),
             born: this.isSet(char.born),

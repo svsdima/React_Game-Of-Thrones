@@ -22,19 +22,20 @@ export default class ItemList extends Component {
 
     /* Создаём список персонажей */
     renderItems(arr) {
-        return arr.map((item, id) => {
-            // const {id} = item;
+        return arr.map((item) => {
+            const {id} = item;
+
             const label = this.props.renderItem(item);
-            // const {id, name} = item;
+
             return (
                 <li 
                     key={id}
                     className="list-group-item"
-                    onClick={() => this.props.onItemSelected(41 + id)}>
+                    onClick={ () => this.props.onItemSelected(id)}>
                     {label}
-                </li> 
-            );
-        });
+                </li>
+            )
+        })
     }
 
     render() {
