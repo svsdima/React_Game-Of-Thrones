@@ -26,18 +26,18 @@ export default class ItemDetail extends Component {
 
     /* При обновлении компонента вызываем обновление персонажа */
     componentDidMount() {
-        this.updateChar();
+        this.updateItem();
     }
 
     /* Проверка на совпадение с предыдущим пропсом */
     componentDidUpdate(prevProps) {
         if (this.props.itemId !== prevProps.itemId) {
-            this.updateChar();
+            this.updateItem();
         }
     }
 
     /* Обновление персонажа */
-    updateChar() {
+    updateItem() {
         const {itemId} = this.props;
         if (!itemId) {
             return
